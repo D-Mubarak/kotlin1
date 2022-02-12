@@ -9,8 +9,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.geektech.kotlin1.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-   private lateinit var viewBinding: ActivityMainBinding
+    private lateinit var viewBinding: ActivityMainBinding
     private lateinit var registerForActivityResult: ActivityResultLauncher<Intent>
+
+    companion object {
+        const val KEY1 = "key1"
+        const val KEY_BACK = "keyBack"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,12 +25,12 @@ class MainActivity : AppCompatActivity() {
             if (viewBinding.etText.text.toString().isEmpty()) {
                 Toast.makeText(
                     this,
-                    "Данное поле не может быть пустым",
+                    getString(R.string.warning),
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
                 Intent(this@MainActivity, MainActivity2::class.java).apply {
-                    putExtra("key1", viewBinding.etText.text.toString())
+                    putExtra(KEY1, viewBinding.etText.text.toString())
                     registerForActivityResult.launch(this)
                 }
             }
@@ -33,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         registerForActivityResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
-            viewBinding.etText.setText(result.data?.getStringExtra("keyBack"))
+            viewBinding.etText.setText(result.data?.getStringExtra(KEY_BACK))
         }
 
     }
