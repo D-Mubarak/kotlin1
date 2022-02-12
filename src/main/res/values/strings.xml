@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Kotlin1</string>
+    <string name="value">Значение: 0</string>
+    <string name="go_back">Go back</string>
+    <string name="text">Text:</string>
+    <string name="go">GO</string>
+    <!--HomeFragment-->
+
+</resources>
